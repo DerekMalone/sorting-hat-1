@@ -1,3 +1,7 @@
+import sortingHat from './sortingHat';
+import errorMessage from '../errorMessage';
+import cardCreator from '../../components/cardCreator';
+
 const studentArray = [];
 const voldermortsArmy = [];
 
@@ -29,3 +33,5 @@ const expelStudent = (e) => {
     cardCreator('#voldermorts-army', voldermortsArmy);
   }
 };
+
+export { addStudentToArray, expelStudent };
