@@ -1,8 +1,6 @@
 import 'bootstrap'; // import bootstrap elements and js
 import '../styles/main.scss';
 
-const studentArray = [];
-const voldermortsArmy = [];
 const houseColors = {
   gryffindor: '#7F0909',
   slytherin: '#0D6217',
@@ -25,14 +23,6 @@ const errorMessage = (student) => {
       </div>`;
   }
 };
-
-let sortingHat = () => {
-  const houses = ['gryffindor', 'slytherin', 'hufflepuff', 'ravenclaw'];
-  sortingHat = houses[Math.floor(Math.random() * houses.length)];
-  return sortingHat;
-};
-
-const sortStudentsByHouse = (array) => array.sort((a, b) => (a.house > b.house ? 1 : -1));
 
 const cardCreator = (divId, array) => {
   let card = '';
@@ -68,24 +58,6 @@ const cardCreator = (divId, array) => {
   renderToDOM(divId, card);
 };
 
-const addStudentToArray = (e) => {
-  if (e.target.id === 'sort' || e.keyCode === 13) {
-    const student = document.querySelector('#student-name');
-    errorMessage(student.value);
-
-    if (student.value) {
-      studentArray.push({
-        name: student.value,
-        house: sortingHat(),
-      });
-      student.value = '';
-    }
-
-    const sortedArray = sortStudentsByHouse(studentArray);
-    cardCreator('#first-years-card-display', sortedArray);
-  }
-};
-
 const showForm = () => {
   document.querySelector('#button-div').innerHTML = '';
   const content = `<div class="card m-3 justify-content-center">
@@ -103,15 +75,6 @@ const showForm = () => {
                     </div>`;
   renderToDOM('#sorting-form', content);
   document.querySelector('#student-name').addEventListener('keyup', addStudentToArray); // this could have easily been accomplished by using a form tag instead of using separate form elements as form submits on enter key press also
-};
-
-const expelStudent = (e) => {
-  if (e.target.type === 'button') {
-    voldermortsArmy.push(studentArray[e.target.id]);
-    studentArray.splice(e.target.id, 1);
-    cardCreator('#first-years-card-display', studentArray);
-    cardCreator('#voldermorts-army', voldermortsArmy);
-  }
 };
 
 const domEvents = () => {
